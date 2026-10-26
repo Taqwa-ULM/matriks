@@ -180,6 +180,49 @@
             margin-top: 10px;
         }
 
+        /* CUSTOM MODAL NOTIFICATION */
+        #customModal {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-box {
+            background: var(--surface);
+            padding: 28px;
+            border-radius: var(--radius-xl);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-box h4 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+        .modal-box p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .btn-modal-close {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
         /* APPLICATION WRAPPER */
         .dashboard-wrapper {
             max-width: 1280px;
@@ -384,11 +427,12 @@
             border: 1px solid var(--border-ui);
             margin: 12px 0;
             text-align: center;
+            overflow-x: auto;
         }
 
         .table-container {
             border-radius: var(--radius-lg);
-            overflow: hidden;
+            overflow-x: auto;
             border: 1px solid var(--border-ui);
             margin: 18px 0;
         }
@@ -545,13 +589,13 @@
             transition: all 0.2s;
         }
 
-        input.correct {
+        input.correct, select.correct {
             border-color: var(--success) !important;
             background-color: var(--success-soft) !important;
             color: #065f46 !important;
         }
 
-        input.wrong {
+        input.wrong, select.wrong {
             border-color: var(--danger) !important;
             background-color: var(--danger-soft) !important;
             color: #991b1b !important;
@@ -640,6 +684,115 @@
             line-height: 1.6;
         }
 
+        /* LATIHAN B: PILIHAN GANDA & BENAR/SALAH STYLES */
+        .latihan-header-banner {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px dashed #f9a8d4;
+        }
+
+        .latihan-badge-pill {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+        }
+
+        .latihan-sub-heading {
+            color: #db2777;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin: 20px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .question-card {
+            background: #f8fafc;
+            border: 1.5px solid var(--border-ui);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 18px;
+            transition: all 0.2s;
+        }
+
+        .question-card:hover {
+            border-color: #cbd5e1;
+        }
+
+        .question-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .tf-options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .mc-options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--surface);
+            border: 1.5px solid var(--border-ui);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .option-label:hover {
+            border-color: var(--primary);
+            background: #f5f7ff;
+        }
+
+        .option-label input[type="radio"] {
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .option-label:has(input[type="radio"]:checked) {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.12);
+        }
+
+        .matrix-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 14px 0;
+        }
+
         .btn-action-primary {
             background: linear-gradient(135deg, var(--accent), #ea580c);
             color: white;
@@ -715,6 +868,9 @@
             border-radius: 20px;
             font-size: 0.78rem;
             font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .badge-done { background: var(--success-soft); color: var(--success); }
@@ -725,10 +881,21 @@
             header.top-bar { flex-direction: column; gap: 16px; }
             .hero-card { flex-direction: column; text-align: center; gap: 18px; }
             .elements-grid { grid-template-columns: 1fr; }
+            .tf-options-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
+<!-- CUSTOM MODAL BOX (MENGGANTIKAN ALERT) -->
+<div id="customModal">
+    <div class="modal-box">
+        <div style="font-size:2.2rem; color:var(--primary); margin-bottom:10px;"><i class="fa-solid fa-bell"></i></div>
+        <h4 id="modalTitle">Informasi</h4>
+        <p id="modalMessage">Pesan sistem.</p>
+        <button class="btn-modal-close" onclick="closeModal()">Tutup</button>
+    </div>
+</div>
 
 <!-- OVERLAY LOGIN SYSTEM -->
 <div id="loginOverlay">
@@ -855,7 +1022,7 @@
 
                     <div style="margin-top:10px;">
                         <label style="font-size:0.9rem; font-weight:700;">Susunan bilangan pada matriks $A$ berbentuk:</label>
-                        <select id="ans_bentuk_A" style="margin-top:6px;">
+                        <select id="ans_bentuk_A" style="margin-top:6px; padding:10px; border-radius:10px; border:1.5px solid var(--border-ui); width:100%; font-weight:700;">
                             <option value="">-- Pilih Bentuk --</option>
                             <option value="Persegi Panjang">Persegi Panjang</option>
                             <option value="Persegi">Persegi</option>
@@ -922,7 +1089,7 @@
 
                     <div style="margin-top:10px;">
                         <label style="font-size:0.9rem; font-weight:700;">Susunan bilangan pada matriks $B$ berbentuk:</label>
-                        <select id="ans_bentuk_B" style="margin-top:6px;">
+                        <select id="ans_bentuk_B" style="margin-top:6px; padding:10px; border-radius:10px; border:1.5px solid var(--border-ui); width:100%; font-weight:700;">
                             <option value="">-- Pilih Bentuk --</option>
                             <option value="Persegi">Persegi</option>
                             <option value="Persegi Panjang">Persegi Panjang</option>
@@ -953,7 +1120,7 @@
                     <h3 style="font-size:0.95rem; font-weight:800; color:var(--primary); margin-bottom:10px;">Bentuk Umum Matriks $A_{m \times n}$</h3>
                     <p class="text-desc">Secara umum, matriks berordo $m \times n$ ($m$ baris dan $n$ kolom) ditulis sebagai berikut:</p>
 
-                    <div style="background:#f8fafc; padding:20px; border-radius:var(--radius-lg); border:1px solid var(--border-ui); text-align:center; margin-bottom:15px;">
+                    <div style="background:#f8fafc; padding:20px; border-radius:var(--radius-lg); border:1px solid var(--border-ui); text-align:center; margin-bottom:15px; overflow-x:auto;">
                         $$A_{m \times n} = \begin{bmatrix} 
                         a_{11} & a_{12} & a_{13} & \dots & a_{1n} \\ 
                         a_{21} & a_{22} & a_{23} & \dots & a_{2n} \\ 
@@ -1272,10 +1439,10 @@
                             </table>
                         </div>
 
-                        <!-- FITUR UPLOAD FOTO JAWABAN (PREVIEW, EDIT, DELETE) -->
+                        <!-- FITUR UPLOAD FOTO JAWABAN MARI MENCOBA (PREVIEW, EDIT, DELETE) -->
                         <div class="upload-section-box">
                             <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                            <h4 style="font-weight:800; color:#6b21a8;">Upload Foto Jawaban Oret-oretan / Buku Latihan</h4>
+                            <h4 style="font-weight:800; color:#6b21a8;">Upload Foto Jawaban Oret-oretan (Mari Mencoba)</h4>
                             <p style="font-size:0.85rem; color:#7e22ce; margin-top:4px;">Foto lembar jawaban kamu lalu unggah di sini sebagai bukti pengerjaan:</p>
 
                             <input type="file" id="inputFotoJawaban" accept="image/*" capture="environment" style="display:none;" onchange="handleFileSelect(event)">
@@ -1298,9 +1465,182 @@
                             </div>
                         </div>
                     </div>
+                </article>
 
+                <!-- ========================================================================= -->
+                <!-- BAGIAN BARU: LATIHAN B - JENIS-JENIS MATRIKS (HALAMAN 135)                -->
+                <!-- ========================================================================= -->
+                <article class="ui-card" style="border: 2px solid #fbcfe8;">
+                    <div class="latihan-header-banner">
+                        <span class="latihan-badge-pill"><i class="fa-solid fa-compass-drafting"></i> Latihan B</span>
+                        <h2 style="font-size:1.35rem; font-weight:800; color:#db2777; margin:0;">Jenis-jenis Matriks</h2>
+                    </div>
+
+                    <p class="text-desc" style="font-weight:600; color:var(--text-main);">
+                        Kerjakan latihan berikut dengan tepat dan benar (Halaman 135).
+                    </p>
+
+                    <!-- PEMAHAMAN KONSEP (NO 1 - 4: BENAR ATAU SALAH PILIHAN GANDA) -->
+                    <div class="latihan-sub-heading">
+                        <i class="fa-solid fa-lightbulb"></i> Pemahaman Konsep
+                    </div>
+
+                    <!-- Nomor 1 -->
+                    <div class="question-card">
+                        <div class="question-text">
+                            <b>1.</b> <i>Benar atau salah.</i> Matriks tegak merupakan bagian dari matriks persegi panjang.
+                        </div>
+                        <div class="tf-options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="latb_q1" value="Benar">
+                                <span><b>A.</b> Benar</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q1" value="Salah">
+                                <span><b>B.</b> Salah</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Nomor 2 -->
+                    <div class="question-card">
+                        <div class="question-text">
+                            <b>2.</b> <i>Benar atau salah.</i> Jika matriks $A$ adalah matriks diagonal, maka matriks $A$ adalah matriks segitiga.
+                        </div>
+                        <div class="tf-options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="latb_q2" value="Benar">
+                                <span><b>A.</b> Benar</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q2" value="Salah">
+                                <span><b>B.</b> Salah</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Nomor 3 -->
+                    <div class="question-card">
+                        <div class="question-text">
+                            <b>3.</b> <i>Benar atau salah.</i> Jika matriks $I$ adalah matriks simetris, maka matriks $I$ adalah matriks identitas.
+                        </div>
+                        <div class="tf-options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="latb_q3" value="Benar">
+                                <span><b>A.</b> Benar</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q3" value="Salah">
+                                <span><b>B.</b> Salah</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Nomor 4 -->
+                    <div class="question-card">
+                        <div class="question-text">
+                            <b>4.</b> <i>Benar atau salah.</i> Transpos dari matriks baris adalah matriks kolom.
+                        </div>
+                        <div class="tf-options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="latb_q4" value="Benar">
+                                <span><b>A.</b> Benar</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q4" value="Salah">
+                                <span><b>B.</b> Salah</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PENERAPAN KONSEP (NO 5, 6, 7) -->
+                    <div class="latihan-sub-heading" style="margin-top:28px;">
+                        <i class="fa-solid fa-gears"></i> Penerapan Konsep
+                    </div>
+
+                    <!-- Nomor 5 & 6: Digabung dengan Upload Foto -->
+                    <div class="question-card">
+                        <div class="question-text">
+                            <b>5.</b> Tentukan jenis matriks-matriks berikut:
+                        </div>
+                        <div class="matrix-showcase-grid">
+                            <div class="matrix-math-box" style="margin:0;">
+                                <b>a).</b> $A = \begin{bmatrix} -3 & 2 & 0 \\ 1 & 3 & 5 \end{bmatrix}$
+                            </div>
+                            <div class="matrix-math-box" style="margin:0;">
+                                <b>b).</b> $B = \begin{bmatrix} 2 & 9 & -1 \\ 0 & 1 & 2 \\ 0 & 0 & 1 \end{bmatrix}$
+                            </div>
+                            <div class="matrix-math-box" style="margin:0;">
+                                <b>c).</b> $C = \begin{bmatrix} 7 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix}$
+                            </div>
+                        </div>
+
+                        <hr style="border:none; border-top:1.5px dashed var(--border-ui); margin:20px 0;">
+
+                        <div class="question-text">
+                            <b>6.</b> Jika diketahui matriks $A = \begin{bmatrix} 7 & -1 & 3 \\ -1 & 9 & 2 \\ 3 & 2 & 1 \end{bmatrix}$ dan $A^t$ merupakan transpos matriks $A$, maka tentukan jenis matriks $A$ dan jenis matriks $A^t$.
+                        </div>
+                        
+                        <div class="upload-section-box" style="margin: 16px 0 0 0; background:#fdf2f8; border-color:#f472b6;">
+                            <div class="upload-icon" style="color:#db2777;"><i class="fa-solid fa-camera-retro"></i></div>
+                            <h4 style="font-weight:800; color:#9d174d;">Upload Foto Jawaban Nomor 5 & 6</h4>
+                            <p style="font-size:0.85rem; color:#be185d; margin-top:4px;">
+                                Tuliskan jawaban untuk soal <b>Nomor 5 (a, b, c)</b> dan <b>Nomor 6</b> di buku catatanmu, lalu unggah fotonya di sini:
+                            </p>
+
+                            <input type="file" id="inputFotoNo6" accept="image/*" capture="environment" style="display:none;" onchange="handleFileSelectNo6(event)">
+
+                            <button type="button" class="btn-upload-trigger" style="background:#db2777;" onclick="document.getElementById('inputFotoNo6').click()">
+                                <i class="fa-solid fa-upload"></i> Unggah Foto Jawaban No. 5 & 6
+                            </button>
+
+                            <!-- PREVIEW AREA NO 5 & 6 -->
+                            <div id="previewAreaNo6" class="preview-wrapper">
+                                <img id="imgPreviewNo6" src="" alt="Pratinjau Foto Jawaban Nomor 5 dan 6" style="border-color:#fbcfe8;">
+                                <div class="preview-actions">
+                                    <button type="button" class="btn-preview-edit" onclick="document.getElementById('inputFotoNo6').click()">
+                                        <i class="fa-solid fa-pen-to-square"></i> Ganti Foto
+                                    </button>
+                                    <button type="button" class="btn-preview-delete" onclick="hapusFotoNo6()">
+                                        <i class="fa-solid fa-trash-can"></i> Hapus Foto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nomor 7: Pilihan Ganda A, B, C, D, E (Satu Benar) -->
+                    <div class="question-card">
+                        <div class="question-text">
+                            <b>7.</b> Jika matriks $I$ adalah matriks identitas, maka matriks $I$ adalah matriks diagonal. Berikan penjelasan tentang kebenaran pernyataan tersebut!
+                        </div>
+                        <div class="mc-options-list">
+                            <label class="option-label">
+                                <input type="radio" name="latb_q7" value="A">
+                                <span><b>A.</b> <b>Benar</b>, karena matriks identitas adalah matriks persegi yang semua elemen di luar diagonal utamanya bernilai nol dan elemen pada diagonal utamanya bernilai 1, sehingga memenuhi syarat definisi matriks diagonal.</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q7" value="B">
+                                <span><b>B.</b> <b>Benar</b>, karena semua matriks diagonal pasti memiliki elemen diagonal utama yang semuanya bernilai 1 seperti matriks identitas.</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q7" value="C">
+                                <span><b>C.</b> <b>Salah</b>, karena matriks identitas dan matriks diagonal merupakan dua jenis matriks yang saling lepas dan tidak memiliki keterkaitan sifat.</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q7" value="D">
+                                <span><b>D.</b> <b>Salah</b>, karena pada matriks diagonal elemen di luar diagonal utama boleh bernilai selain nol, berbeda dengan matriks identitas.</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="latb_q7" value="E">
+                                <span><b>E.</b> <b>Salah</b>, karena matriks identitas tidak memiliki diagonal samping sedangkan matriks diagonal selalu memiliki diagonal samping bernilai 1.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- TOMBOL SUBMIT KESELURUHAN -->
                     <button class="btn-action-primary" onclick="kirimJawaban()">
-                        <i class="fa-solid fa-paper-plane"></i> KIRIM JAWABAN & BUAT SHEET REALTIME
+                        <i class="fa-solid fa-paper-plane"></i> KIRIM SEMUA JAWABAN & UPDATE SHEET REALTIME
                     </button>
                     <p id="submitStatus" style="text-align:center; font-weight:800; margin-top:14px;"></p>
                 </article>
@@ -1309,15 +1649,22 @@
 
             <!-- SIDEBAR INFO -->
             <aside class="sidebar-column">
-                <div class="ui-card">
+                <div class="ui-card" style="position:sticky; top:24px;">
                     <h3 style="font-size:1rem; font-weight:800; margin-bottom:12px; color:var(--primary);">
-                        <i class="fa-solid fa-circle-info"></i> Petunjuk Akses
+                        <i class="fa-solid fa-circle-info"></i> Petunjuk Pengerjaan
                     </h3>
-                    <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6;">
+                    <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:14px;">
                         1. Anda telah login secara resmi di sistem.<br>
-                        2. Selesaikan isian modul dan upload foto jawaban di sebelah kiri.<br>
-                        3. Klik <b>Kirim Jawaban</b> untuk menyinkronkan data ke Google Sheet.
+                        2. Lengkapi isian <b>Eksplorasi 3.1</b>, <b>Mari Mencoba</b>, serta <b>Latihan B (Nomor 1–7)</b>.<br>
+                        3. Pastikan foto bukti jawaban <b>Nomor 5 & 6</b> telah diunggah.<br>
+                        4. Klik tombol <b>Kirim Semua Jawaban</b> di bagian bawah untuk menyinkronkan nilai ke Google Sheet Guru.
                     </p>
+                    <div style="background:#f8fafc; padding:14px; border-radius:12px; border:1px solid var(--border-ui); font-size:0.82rem; color:var(--text-muted);">
+                        <b>Bobot Penilaian Otomatis:</b><br>
+                        • Konsep & Jenis Matriks Awal: <b>40 Poin</b><br>
+                        • Latihan B (No. 1–7): <b>60 Poin</b><br>
+                        <b>Total Skor Maksimal: 100 Poin</b>
+                    </div>
                 </div>
             </aside>
         </div>
@@ -1391,6 +1738,7 @@
                             <th>Kelas</th>
                             <th>Status Tab Sheet</th>
                             <th>Skor Perolehan</th>
+                            <th>Rincian Jawaban</th>
                             <th>Lampiran Foto</th>
                         </tr>
                     </thead>
@@ -1427,6 +1775,18 @@
     let activeMurid = null;
     let submissionCache = {};
     let uploadedFotoBase64 = "";
+    let uploadedFotoNo6Base64 = "";
+
+    // FUNGSI MODAL PENGGANTI ALERT
+    function showModal(title, message) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalMessage').innerText = message;
+        document.getElementById('customModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('customModal').style.display = 'none';
+    }
 
     function submitLogin() {
         const idVal = document.getElementById('loginId').value.trim();
@@ -1487,7 +1847,7 @@
 
     function switchTab(tabId, btn) {
         if (userRole === "murid" && tabId === "tab-guru") {
-            alert("Akses ditolak! Tab ini khusus untuk Guru.");
+            showModal("Akses Ditolak", "Tab ini khusus untuk Guru.");
             return;
         }
 
@@ -1501,13 +1861,13 @@
         loadServerData();
     }
 
-    // UPLOAD & PREVIEW FOTO JAWABAN
+    // UPLOAD & PREVIEW FOTO MARI MENCOBA
     function handleFileSelect(event) {
         const file = event.target.files[0];
         if (!file) return;
 
         if (!file.type.startsWith('image/')) {
-            alert("Harap pilih file gambar/foto!");
+            showModal("Format Tidak Sesuai", "Harap pilih file gambar atau foto!");
             return;
         }
 
@@ -1525,6 +1885,32 @@
         document.getElementById('inputFotoJawaban').value = "";
         document.getElementById('imgPreview').src = "";
         document.getElementById('previewArea').style.display = 'none';
+    }
+
+    // UPLOAD & PREVIEW FOTO LATIHAN B NOMOR 5 & 6
+    function handleFileSelectNo6(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            showModal("Format Tidak Sesuai", "Harap pilih file gambar atau foto untuk jawaban Nomor 5 & 6!");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            uploadedFotoNo6Base64 = e.target.result;
+            document.getElementById('imgPreviewNo6').src = uploadedFotoNo6Base64;
+            document.getElementById('previewAreaNo6').style.display = 'flex';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function hapusFotoNo6() {
+        uploadedFotoNo6Base64 = "";
+        document.getElementById('inputFotoNo6').value = "";
+        document.getElementById('imgPreviewNo6').src = "";
+        document.getElementById('previewAreaNo6').style.display = 'none';
     }
 
     function loadServerData() {
@@ -1591,44 +1977,69 @@
         }
     }
 
+    function getRadioValue(name) {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.value : "";
+    }
+
     function kirimJawaban() {
         if(!activeMurid) {
-            alert("Harap login sebagai murid terlebih dahulu!");
+            showModal("Belum Login", "Harap login sebagai murid terlebih dahulu untuk mengirim jawaban!");
             return;
         }
 
-        const t1_am = document.getElementById('t1_a_m').value;
-        const ma11 = document.getElementById('ma_11').value;
+        // Ambil nilai Eksplorasi & Mari Mencoba (40 Poin)
+        const t1_am = document.getElementById('t1_a_m').value.trim();
+        const ma11 = document.getElementById('ma_11').value.trim();
         const shapeA = document.getElementById('ans_bentuk_A').value;
 
-        const mb11 = document.getElementById('mb_11').value;
-        const mb12 = document.getElementById('mb_12').value;
-        const mb13 = document.getElementById('mb_13').value;
+        const mb11 = document.getElementById('mb_11').value.trim();
+        const mb12 = document.getElementById('mb_12').value.trim();
+        const mb13 = document.getElementById('mb_13').value.trim();
         const shapeB = document.getElementById('ans_bentuk_B').value;
 
         const trJenisA = document.getElementById('tr_jenis_a').value;
         const trJenisB = document.getElementById('tr_jenis_b').value;
         const trJenisC = document.getElementById('tr_jenis_c').value;
 
+        // Ambil nilai Latihan B (60 Poin)
+        const q1 = getRadioValue('latb_q1'); // Kunci: Benar
+        const q2 = getRadioValue('latb_q2'); // Kunci: Benar
+        const q3 = getRadioValue('latb_q3'); // Kunci: Salah
+        const q4 = getRadioValue('latb_q4'); // Kunci: Benar
+        const q7 = getRadioValue('latb_q7'); // Kunci: A
+
         let skor = 0;
-        if(t1_am == "80") skor += 15;
-        if(ma11 == "80") skor += 15;
-        if(shapeA === "Persegi Panjang") skor += 10;
-        if(mb11 == "2" && mb12 == "1" && mb13 == "0") skor += 20;
-        if(shapeB === "Persegi") skor += 15;
-        if(trJenisA === "Matriks Baris" && trJenisB === "Matriks Tegak" && trJenisC === "Matriks Persegi") skor += 25;
+
+        // Perhitungan Skor Bagian Awal (Maks 40)
+        if(t1_am === "80" && ma11 === "80") skor += 10;
+        if(shapeA === "Persegi Panjang") skor += 5;
+        if(mb11 === "2" && mb12 === "1" && mb13 === "0") skor += 10;
+        if(shapeB === "Persegi") skor += 5;
+        if(trJenisA === "Matriks Baris" && trJenisB === "Matriks Tegak" && trJenisC === "Matriks Persegi") skor += 10;
+
+        // Perhitungan Skor Latihan B (Maks 60)
+        if(q1 === "Benar") skor += 7;
+        if(q2 === "Benar") skor += 7;
+        if(q3 === "Salah") skor += 7;
+        if(q4 === "Benar") skor += 7;
+        if(uploadedFotoNo6Base64 !== "") skor += 22; // Poin gabungan upload bukti jawaban No. 5 & 6 (10 + 12)
+        if(q7 === "A") skor += 10;
+
+        // Prioritaskan foto Nomor 5 & 6 atau foto Mari Mencoba untuk dikirim ke kolom foto Sheet
+        const finalFoto = uploadedFotoNo6Base64 || uploadedFotoBase64;
 
         const payload = {
             nama: activeMurid.nama,
             kelas: activeMurid.kelas,
             skor: skor,
-            detail: `A:[${ma11}], ShapeA:${shapeA}, TransposJenis:[${trJenisA},${trJenisB},${trJenisC}]`,
-            foto: uploadedFotoBase64
+            detail: `Eksplorasi:[A11=${ma11},Bentuk=${shapeA},${shapeB}], MariMencoba:[${trJenisA},${trJenisB},${trJenisC}], LatihanB:[1=${q1}, 2=${q2}, 3=${q3}, 4=${q4}, 5&6=${uploadedFotoNo6Base64 ? 'FotoAda' : 'Kosong'}, 7=${q7}]`,
+            foto: finalFoto
         };
 
         const statusEl = document.getElementById('submitStatus');
         statusEl.style.color = "var(--primary)";
-        statusEl.innerText = "Mengirim data dan foto jawaban ke Google Sheet server...";
+        statusEl.innerText = "Mengirim seluruh jawaban dan lampiran foto ke Google Sheet server...";
 
         fetch(SCRIPT_URL, {
             method: 'POST',
@@ -1637,11 +2048,11 @@
             body: JSON.stringify(payload)
         }).then(() => {
             statusEl.style.color = "var(--success)";
-            statusEl.innerHTML = `✅ Berhasil dikirim! Sheet atas nama <b>"${activeMurid.nama}"</b> telah diperbarui.<br>Skor: ${skor}/100`;
+            statusEl.innerHTML = `✅ Berhasil dikirim! Sheet atas nama <b>"${activeMurid.nama}"</b> telah diperbarui.<br>Skor Total Anda: <b>${skor} / 100</b>`;
             
             setTimeout(loadServerData, 1500);
         }).catch(() => {
-            statusEl.style.color = "red";
+            statusEl.style.color = "var(--danger)";
             statusEl.innerText = "❌ Terjadi kendala saat menghubungkan ke Google Apps Script.";
         });
     }
@@ -1667,7 +2078,7 @@
             tb.innerHTML = `
                 <tr>
                     <td>${item.waktu}</td>
-                    <td>Bab A (Konsep) & Bab B (Jenis & Transpos Hlm 130-134)</td>
+                    <td>Bab A, Bab B & Latihan B (Hlm 130–135)</td>
                     <td><b>${item.skor}</b></td>
                     <td>${fotoBadge}</td>
                     <td><span class="badge-status badge-done">Sheet Terbuat</span></td>
@@ -1709,6 +2120,7 @@
                     <td>${m.kelas}</td>
                     <td>${badge}</td>
                     <td><b>${isDone ? cache.skor : '-'}</b></td>
+                    <td style="font-size:0.78rem; text-align:left; max-width:260px; word-break:break-word;">${isDone && cache.detail ? cache.detail : '-'}</td>
                     <td>${fotoBadge}</td>
                 </tr>
             `;
